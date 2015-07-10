@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="add">
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  
+  <path id="classpath">
+    <fileset dir="lib/" includes="lwjgl.jar"/>
+  </path>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" classpathref="classpath"/>
+  </target>
+
+  <target name="build">
+    <jar destfile="${dist}/helloworld.jar"
+     basedir="build">
+      <manifest>
+	<attribute name="Main-Class" value="org.fullstack.helloworld.HelloWorld"/>
+      </manifest>
+      <zipgroupfileset dir="lib/" includes="lwjgl.jar"/>
+    </jar>
+  </target>
+</project>
